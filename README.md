@@ -108,7 +108,7 @@ def obtener_noticias_cespe():
         
         if len(texto) > 30 and texto not in textos_vistos: # Filtro para validar longitud y verificar que no esté duplicado
             textos_vistos.add(texto) # Registro del nuevo texto en el conjunto para evitar futuras repeticiones
-            noticias_texto.append(texto) # Inserción del texto limpio en la lista final
+            noticias_texto.append(texto) # Meter el texto limpio en la lista final
             
     return noticias_texto # Retorno de la lista con todos los textos de noticias procesados
 
@@ -131,31 +131,31 @@ def procesar_y_evaluar_dias(texto):
             if i + 1 < texto_size: # Validación de existencia de un elemento posterior en la lista
                 siguiente_palabra = palabras[i + 1].strip(",.:;") # Limpieza de caracteres en la siguiente palabra
                 
-                if siguiente_palabra.isdigit(): # Evaluación si la palabra subsiguiente es un número entero
+                if siguiente_palabra.isdigit(): # Evaluación si la palabra siguiente es un número entero
                     numero_dia = int(siguiente_palabra) # Conversión del string a entero
                     
-                    if 1 <= numero_dia <= 31: # Evaluación del rango válido (1 a 31)
+                    if 1 <= numero_dia <= 31: # Evaluación del rango válido (1 al 31)
                         # Normalización de días para eliminar acentos en las llaves del diccionario
                         dia_limpio = "miercoles" if palabra_actual in ["miercoles", "miércoles"] else palabra_actual
                         dia_limpio = "sabado" if dia_limpio in ["sabado", "sábado"] else dia_limpio
                         
                         diccionario_dias[dia_limpio] = numero_dia # Guardado en el diccionario
                     else:
-                        print(f"Día descartado fuera de rango (1-31): {palabra_actual} {numero_dia}") # Log de descartados
+                        print(f"Día descartado fuera de rango (1-31): {palabra_actual} {numero_dia}") # Descartados
                         
-    return diccionario_dias # Retorno del diccionario validado
+    return diccionario_dias # Retorno del diccionario
 ```
 
 ### Funcionalidad del módulo
 
 Estas funciones permiten:
 
-- Conectarse al portal de noticias de CESPE.
-- Obtener el contenido HTML de la página.
-- Extraer párrafos de información.
-- Analizar el contenido de cada noticia.
-- Detectar días de la semana acompañados de fechas válidas.
-- Generar diccionarios con el día y número.
+- Conectarse al portal de noticias de CESPE
+- Obtener el contenido HTML de la página
+- Extraer párrafos de información
+- Analizar el contenido de cada noticia
+- Detectar días de la semana acompañados de fechas válidas
+- Generar diccionarios con el día y número
 
 ---
 
@@ -174,39 +174,39 @@ def main():
     
     # 1. Obtención de las noticias publicadas
     noticias = obtener_noticias_cespe() # Llamada a la función de extracción
+    print(f"Se encontraron {len(noticias)} fragmentos de noticias.\n")
     
     # Lista global para guardar los diccionarios de cada noticia procesada
     resultados_totales = []
     
-    # 2. Evaluación de cada noticia obtenida
-    for noticia in noticias:
-        diccionario_evaluado = procesar_y_evaluar_dias(noticia)
+    # 2. Evaluación de cada noticia
+    for noticia in noticias: # Recorrido de las noticias
+        diccionario_evaluado = procesar_y_evaluar_dias(noticia) # Evaluación de los días
         
-        if diccionario_evaluado:
+        if diccionario_evaluado: # Verificación si se identificaron días válidos
             print(f"--- Noticia ---")
-            print(f"Texto: {noticia[:400]}...")
-            print(f"Diccionario obtenido: {diccionario_evaluado}\n")
+            print(f"Texto: {noticia[:400]}...") # Muestra los primeros 400 caracteres del texto
+            print(f"Diccionario obtenido: {diccionario_evaluado}\n") # Muestra del diccionario obtenido
             
-            resultados_totales.append(diccionario_evaluado)
+            resultados_totales.append(diccionario_evaluado) # Agregar a la lista de resultados generales
             
     print("Procesamiento completado.")
 
-if __name__ == "__main__":
-    main()
+if __name__ == "__main__": # Bloque de inicio
+    main()  # Llamada a la función principal
 ```
 
 ### Funcionalidad del archivo principal
 
 El archivo principal realiza lo siguiente:
 
-1. Importa las funciones del módulo.
-2. Inicia el proceso de Scraping.
-3. Obtiene las noticias publicadas en CESPE.
-4. Procesa cada noticia individualmente.
-5. Evalúa los días de la semana encontrados.
-6. Almacena los resultados en una lista.
-7. Muestra los resultados obtenidos en la terminal.
-8. Finaliza el programa cuando concluye el procesamiento.
+1. Importa las funciones del módulo
+2. Inicia el proceso de Scraping
+3. Obtiene las noticias de CESPE
+4. Procesa cada noticia individualmente
+5. Evalúa los días de la semana
+6. Almacena los resultados en una lista
+7. Muestra los resultados obtenidos en la terminal
 
 ---
 
