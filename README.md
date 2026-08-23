@@ -117,32 +117,33 @@ def procesar_y_evaluar_dias(texto):
     Analizar el texto de una noticia, detectar los días de la semana seguidos de un número
     y validar que dicho número esté en el rango de 1 a 31.
     """
-    dias_semana = ["domingo", "lunes", "martes", "miercoles", "miércoles", "jueves", "viernes", "sabado", "sábado"]
+    dias_semana = ["domingo", "lunes", "martes", "miercoles", "miércoles", "jueves", "viernes", "sabado", "sábado"] # Lista de días
     
-    palabras = texto.split()
-    diccionario_dias = {}
+    palabras = texto.split() # Conversión de la cadena de texto a lista de palabras
+    diccionario_dias = {} # Creación del diccionario de almacenamiento
     
-    texto_size = len(palabras)
+    texto_size = len(palabras)  # Cálculo del total de palabras
     
-    for i in range(texto_size):
-        palabra_actual = palabras[i].lower().strip(",.:;")
+    for i in range(texto_size): # Búsqueda por posición en la lista de palabras
+        palabra_actual = palabras[i].lower().strip(",.:;") # Normalización a minúsculas y limpieza de signos
         
-        if palabra_actual in dias_semana:
-            if i + 1 < texto_size:
-                siguiente_palabra = palabras[i + 1].strip(",.:;")
+        if palabra_actual in dias_semana: # Evaluación si la palabra coincide con un día de la semana
+            if i + 1 < texto_size: # Validación de existencia de un elemento posterior en la lista
+                siguiente_palabra = palabras[i + 1].strip(",.:;") # Limpieza de caracteres en la siguiente palabra
                 
-                if siguiente_palabra.isdigit():
-                    numero_dia = int(siguiente_palabra)
+                if siguiente_palabra.isdigit(): # Evaluación si la palabra subsiguiente es un número entero
+                    numero_dia = int(siguiente_palabra) # Conversión del string a entero
                     
-                    if 1 <= numero_dia <= 31:
+                    if 1 <= numero_dia <= 31: # Evaluación del rango válido (1 a 31)
+                        # Normalización de días para eliminar acentos en las llaves del diccionario
                         dia_limpio = "miercoles" if palabra_actual in ["miercoles", "miércoles"] else palabra_actual
                         dia_limpio = "sabado" if dia_limpio in ["sabado", "sábado"] else dia_limpio
                         
-                        diccionario_dias[dia_limpio] = numero_dia
+                        diccionario_dias[dia_limpio] = numero_dia # Guardado en el diccionario
                     else:
-                        print(f"Día descartado fuera de rango (1-31): {palabra_actual} {numero_dia}")
+                        print(f"Día descartado fuera de rango (1-31): {palabra_actual} {numero_dia}") # Log de descartados
                         
-    return diccionario_dias
+    return diccionario_dias # Retorno del diccionario validado
 ```
 
 ### Funcionalidad del módulo
