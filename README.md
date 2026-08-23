@@ -14,7 +14,7 @@ Utilicé el programa **Visual Studio Code**, ya que es la herramienta con la que
 
 ## 2. Revisión de trabajos previos
 
-Antes de comenzar el desarrollo del proyecto, realicé una revisión de los trabajos elaborados anteriormente en la materia **Programación para la Extracción de Datos**.
+Antes de comenzar el desarrollo del trabajo, realicé una revisión de los trabajos elaborados anteriormente en la materia **Programación para la Extracción de Datos**.
 
 Estos trabajos me sirvieron de referencia para comprender nuevamente conceptos relacionados con:
 
@@ -23,7 +23,7 @@ Estos trabajos me sirvieron de referencia para comprender nuevamente conceptos r
 - Procesamiento de información obtenida desde páginas web.
 - Organización modular de proyectos en Python.
 
-Además de servir como guía para la elaboración del scraping de la página de **CESPE**, esta revisión me ayudó a reforzar conocimientos adquiridos durante el curso y recordar procedimientos.
+Además de servir como guía para la elaboración del Scraping de la página de **CESPE**, esta revisión me ayudó a reforzar conocimientos adquiridos durante el curso y recordar procedimientos.
 
 ### Ejemplos de trabajos utilizados como referencia
 
