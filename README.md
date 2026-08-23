@@ -8,7 +8,7 @@ Para el desarrollo de este proyecto se utilizó **Python 3.14.3**
 
 La ejecución de Python se realizó desde la terminal de Visual Studio Code. Esto permitió crear y administrar entornos virtuales, instalar dependencias y ejecutar los scripts del trabajo.
 
-Utilicé el programa **Visual Studio Code**, ya que es la herramienta con la que tengo familiaridad. Además, VS Code facilita la edición de código, la administración de proyectos en Python y la ejecución de scripts desde una terminal integrada.
+Utilicé el programa **Visual Studio Code**, ya que es la herramienta con la que tengo más familiaridad. Además, facilita la edición de código, la administración de proyectos en Python y la ejecución de scripts desde una terminal integrada.
 
 ---
 
