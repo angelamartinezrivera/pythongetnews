@@ -119,16 +119,16 @@ def procesar_y_evaluar_dias(texto):
     """
     dias_semana = ["domingo", "lunes", "martes", "miercoles", "miércoles", "jueves", "viernes", "sabado", "sábado"] # Lista de días
     
-    palabras = texto.split() # Conversión de la cadena de texto a lista de palabras
-    diccionario_dias = {} # Creación del diccionario de almacenamiento
+    palabras = texto.split() # Cadena de texto a lista de palabras
+    diccionario_dias = {} # Creación del diccionario que servirá de almacenamiento
     
     texto_size = len(palabras)  # Cálculo del total de palabras
     
     for i in range(texto_size): # Búsqueda por posición en la lista de palabras
-        palabra_actual = palabras[i].lower().strip(",.:;") # Normalización a minúsculas y limpieza de signos
+        palabra_actual = palabras[i].lower().strip(",.:;") # Convertir a minúsculas y limpieza de signos
         
         if palabra_actual in dias_semana: # Evaluación si la palabra coincide con un día de la semana
-            if i + 1 < texto_size: # Validación de existencia de un elemento posterior en la lista
+            if i + 1 < texto_size: # Validación de existencia de un elemento después/siguiente en la lista
                 siguiente_palabra = palabras[i + 1].strip(",.:;") # Limpieza de caracteres en la siguiente palabra
                 
                 if siguiente_palabra.isdigit(): # Evaluación si la palabra siguiente es un número entero
