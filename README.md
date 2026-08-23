@@ -174,7 +174,7 @@ def main():
     
     # 1. Obtención de las noticias publicadas
     noticias = obtener_noticias_cespe() # Llamada a la función de extracción
-    print(f"Se encontraron {len(noticias)} fragmentos de noticias.\n")
+    print(f"Se encontraron {len(noticias)} noticias.\n")
     
     # Lista global para guardar los diccionarios de cada noticia procesada
     resultados_totales = []
@@ -226,4 +226,4 @@ Durante la ejecución, el sistema accede al portal de noticias de CESPE, obtiene
 
 <img width="690" height="424" alt="image" src="https://github.com/user-attachments/assets/eae3c943-58bc-4a6d-b7d1-2bdd13c62040" />
 
-Muestra que se encontraron 41 fragmentos de noticia, pero solo 4 noticias sí cumplen con el filtro. Por lo tanto, 37 noticias son comunicados generales que no tienen una fecha en formato "día + número del 1 al 31" (como "martes 4" o "domingo 9"), la función procesar_y_evaluar_dias() devuelve {} para ellas.
+Muestra que se encontraron 41 noticias, pero solo 4 noticias sí cumplen con el filtro. Por lo tanto, 37 noticias son comunicados generales que no tienen una fecha en formato "día + número del 1 al 31" (como "martes 4" o "domingo 9"), la función procesar_y_evaluar_dias() devuelve {} para ellas.
