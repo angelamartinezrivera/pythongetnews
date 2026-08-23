@@ -154,7 +154,7 @@ Estas funciones permiten:
 - Obtener el contenido HTML de la página
 - Extraer párrafos de información
 - Analizar el contenido de cada noticia
-- Detectar días de la semana acompañados de fechas válidas
+- Detectar días de la semana acompañados de fechas
 - Generar diccionarios con el día y número
 
 ---
