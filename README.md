@@ -1,10 +1,10 @@
-# Nombre: Angela Guadalupe Martínez Rivera
+## Nombre: Angela Guadalupe Martínez Rivera
 
-# Documentación del Proyecto de Scraping de CESPE
+# Documentación del Trabajo de Scraping de la página de noticias de CESPE
 
 ## 1. Configuración del entorno de desarrollo
 
-Para el desarrollo de este proyecto se utilizó **Python 3.14.3**.
+Para el desarrollo de este proyecto se utilizó **Python 3.14.3**
 
 La ejecución de Python se realizó desde la terminal de Visual Studio Code. Esto permitió crear y administrar entornos virtuales, instalar dependencias y ejecutar los scripts del trabajo.
 
@@ -225,4 +225,4 @@ Durante la ejecución, el sistema accede al portal de noticias de CESPE, obtiene
 
 <img width="690" height="424" alt="image" src="https://github.com/user-attachments/assets/eae3c943-58bc-4a6d-b7d1-2bdd13c62040" />
 
-Aparentemente muestra que se encontraron 41 fragmentos de noticia, pero solo 4 noticias sí cumplen con el filtro. Por lo tanto, 37 noticias son comunicados generales, avisos de corte de agua, comunicados de prensa o títulos que no tienen una fecha en formato "día + número del 1 al 31" (como "martes 4" o "domingo 9"), la función procesar_y_evaluar_dias() devuelve {} para ellas.
+Muestra que se encontraron 41 fragmentos de noticia, pero solo 4 noticias sí cumplen con el filtro. Por lo tanto, 37 noticias son comunicados generales, avisos de corte de agua, comunicados de prensa o títulos que no tienen una fecha en formato "día + número del 1 al 31" (como "martes 4" o "domingo 9"), la función procesar_y_evaluar_dias() devuelve {} para ellas.
