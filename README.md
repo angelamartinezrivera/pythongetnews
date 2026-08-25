@@ -84,33 +84,32 @@ El archivo `cespe_scraping.py` contiene las funciones para realizar el Scraping 
 ### Código del módulo
 
 ```python
-# Módulo para extraer noticias de la CESPE y procesar fechas válidas
-import requests # Librería para realizar peticiones HTTP
-from bs4 import BeautifulSoup # Librería para extraer información del contenido HTML
+import requests #Librería para realizar peticiones HTTP
+from bs4 import BeautifulSoup #Librería para extraer información del contenido HTML
 
 def obtener_noticias_cespe():
     """
     Obtener el contenido HTML de la página de noticias de la CESPE
     y extrae el texto de las noticias.
     """
-    url = "http://www.cespe.gob.mx/public/Noticias" # URL de las noticias de CESPE
+    url = "http://www.cespe.gob.mx/public/Noticias" #URL de las noticias de CESPE
     
-    respuesta = requests.get(url) # Envío de la petición GET a la página web
-    soup = BeautifulSoup(respuesta.text, 'html.parser') # Creación del objeto BeautifulSoup
+    respuesta = requests.get(url) #Envío de la petición GET a la página web
+    soup = BeautifulSoup(respuesta.text, 'html.parser') #Creación del objeto BeautifulSoup
     
-    noticias_texto = [] # Lista vacía para almacenar las noticias finales
-    textos_vistos = set() # Conjunto auxiliar para rastrear los textos ya procesados
+    noticias_texto = [] #Lista vacía para almacenar las noticias finales
+    textos_vistos = set() #Conjunto auxiliar para rastrear los textos ya procesados
     
-    articulos = soup.find_all(['h2', 'h3', 'p']) # Extraer los encabezados y párrafos del documento
+    articulos = soup.find_all(['h2', 'h3', 'p']) #Extraer los encabezados y párrafos del documento
     
-    for elem in articulos: # Recorrido de los elementos HTML encontrados
-        texto = elem.get_text(strip=True) # Limpieza de espacios en blanco al inicio y final
+    for elem in articulos: #Recorrido de los elementos HTML encontrados
+        texto = elem.get_text(strip=True) #Limpieza de espacios en blanco al inicio y final
         
-        if len(texto) > 30 and texto not in textos_vistos: # Filtro para validar longitud y verificar que no esté duplicado
-            textos_vistos.add(texto) # Registro del nuevo texto en el conjunto para evitar futuras repeticiones
-            noticias_texto.append(texto) # Meter el texto limpio en la lista final
+        if len(texto) > 30 and texto not in textos_vistos: #Filtro para validar longitud y verificar que no esté duplicado
+            textos_vistos.add(texto) #Registro del nuevo texto en el conjunto para evitar futuras repeticiones
+            noticias_texto.append(texto) #Meter el texto limpio en la lista final
             
-    return noticias_texto # Retorno de la lista con todos los textos de noticias procesados
+    return noticias_texto #Lista con todos los textos de noticias procesados
 
 def procesar_y_evaluar_dias(texto):
     """
@@ -119,43 +118,68 @@ def procesar_y_evaluar_dias(texto):
     """
     dias_semana = ["domingo", "lunes", "martes", "miercoles", "miércoles", "jueves", "viernes", "sabado", "sábado"] # Lista de días
     
-    palabras = texto.split() # Cadena de texto a lista de palabras
-    diccionario_dias = {} # Creación del diccionario que servirá de almacenamiento
+    palabras = texto.split() #Cadena de texto a lista de palabras
+    diccionario_dias = {} #Creación del diccionario que servirá de almacenamiento
     
-    texto_size = len(palabras)  # Cálculo del total de palabras
+    texto_size = len(palabras)  #Cálculo del total de palabras
     
-    for i in range(texto_size): # Búsqueda por posición en la lista de palabras
-        palabra_actual = palabras[i].lower().strip(",.:;") # Convertir a minúsculas y limpieza de signos
+    for i in range(texto_size): #Búsqueda por posición en la lista de palabras
+        palabra_actual = palabras[i].lower().strip(",.:;") #Convertir a minúsculas y limpieza de signos
         
-        if palabra_actual in dias_semana: # Evaluación si la palabra coincide con un día de la semana
-            if i + 1 < texto_size: # Validación de existencia de un elemento después/siguiente en la lista
-                siguiente_palabra = palabras[i + 1].strip(",.:;") # Limpieza de caracteres en la siguiente palabra
+        if palabra_actual in dias_semana: #Evaluación si la palabra coincide con un día de la semana
+            if i + 1 < texto_size: #Validación de existencia de un elemento después/siguiente en la lista
+                siguiente_palabra = palabras[i + 1].strip(",.:;") #Limpieza de caracteres en la siguiente palabra
                 
-                if siguiente_palabra.isdigit(): # Evaluación si la palabra siguiente es un número entero
-                    numero_dia = int(siguiente_palabra) # Conversión del string a entero
+                if siguiente_palabra.isdigit(): #Evaluación si la palabra siguiente es un número entero
+                    numero_dia = int(siguiente_palabra) #Conversión del string a entero
                     
-                    if 1 <= numero_dia <= 31: # Evaluación del rango válido (1 al 31)
-                        # Normalización de días para eliminar acentos en las llaves del diccionario
+                    if 1 <= numero_dia <= 31: #Evaluación del rango válido (1 al 31)
+                        #Normalización de días para eliminar acentos en las llaves del diccionario
                         dia_limpio = "miercoles" if palabra_actual in ["miercoles", "miércoles"] else palabra_actual
                         dia_limpio = "sabado" if dia_limpio in ["sabado", "sábado"] else dia_limpio
                         
-                        diccionario_dias[dia_limpio] = numero_dia # Guardado en el diccionario
+                        diccionario_dias[dia_limpio] = numero_dia #Guardado en el diccionario
                     else:
                         print(f"Día descartado fuera de rango (1-31): {palabra_actual} {numero_dia}") # Descartados
                         
-    return diccionario_dias # Retorno del diccionario
+    return diccionario_dias #Mostrar el diccionario
+
+def extraer_vias_publicas(texto):
+    """
+    Busca palabras clave de vías públicas en el texto y guarda la 
+    siguiente palabra en un diccionario.
+    """
+    # Diccionario con listas vacías
+    diccionario_vias = {                                 
+        "calle": [], #Almacenar los nombres de las calles encontradas
+        "avenida": [], #Almacenar los nombres de las avenidas encontradas
+        "colonia": [] #Almacenar los nombres de las colonias encontradas
+    }
+    
+    palabras = texto.split() # Cadena de texto en una lista de palabras individuales
+    total_palabras = len(palabras) #Cantidad total de palabras en la lista
+    
+    for i in range(total_palabras):  #Recorrido por la posición de cada palabra en el texto
+        palabra_actual = palabras[i].lower().strip(",.:;") # Minúsculas y eliminación de signos de puntuación
+        
+        # Validar que exista una palabra después
+        if i + 1 < total_palabras: #Comprobación de que no sea la última palabra para evitar un error de índice
+            siguiente_palabra = palabras[i + 1].strip(",.:;") #Limpieza de signos de puntuación en la palabra siguiente
+            
+            # Clasificar avenidas
+            if palabra_actual in ["avenida", "av", "bulevar", "blvd"]: #Evaluación si la palabra coincide con avenida
+                diccionario_vias["avenida"].append(siguiente_palabra) #Agregar el nombre de la avenida en el diccionario
+                    
+            # Clasificar calles
+            elif palabra_actual == "calle": #Evaluación si la palabra es exactamente calle
+                diccionario_vias["calle"].append(siguiente_palabra) #Agregar el nombre de la calle en el diccionario
+                    
+            # Clasificar colonias
+            elif palabra_actual in ["colonia", "col"]: #Evaluación si la palabra coincide con colonia
+                diccionario_vias["colonia"].append(siguiente_palabra) # Inserción del nombre de la colonia en el diccionario
+                    
+    return diccionario_vias # Diccionario con las vías
 ```
-
-### Funcionalidad del módulo
-
-Estas funciones permiten:
-
-- Conectarse al portal de noticias de CESPE
-- Obtener el contenido HTML de la página
-- Extraer párrafos de información
-- Analizar el contenido de cada noticia
-- Detectar días de la semana acompañados de fechas
-- Generar diccionarios con el día y número
 
 ---
 
@@ -166,47 +190,30 @@ Después de crear el módulo con las funciones necesarias, se desarrolló el arc
 ### Código del archivo principal
 
 ```python
-# Archivo ejecutable principal
-from modulos.cespe_scraping import obtener_noticias_cespe, procesar_y_evaluar_dias # Importación de funciones
+#Importación de funciones
+from modulos.cespe_scraping import obtener_noticias_cespe, procesar_y_evaluar_dias, extraer_vias_publicas # Importación de funciones
 
 def main():
     print("Iniciando scraping en la página de CESPE\n")
     
-    # 1. Obtención de las noticias publicadas
+    #1. Obtención de las noticias publicadas
     noticias = obtener_noticias_cespe() # Llamada a la función de extracción
     print(f"Se encontraron {len(noticias)} noticias.\n")
-    
-    # Lista global para guardar los diccionarios de cada noticia procesada
-    resultados_totales = []
-    
-    # 2. Evaluación de cada noticia
+      
+    #2. Evaluación de cada noticia
     for noticia in noticias: # Recorrido de las noticias
-        diccionario_evaluado = procesar_y_evaluar_dias(noticia) # Evaluación de los días
+        diccionario_dias = procesar_y_evaluar_dias(noticia) #Evaluación de los días
+        diccionario_vias = extraer_vias_publicas(noticia) #Evaluación de las vías
         
-        if diccionario_evaluado: # Verificación si se identificaron días válidos
+        if diccionario_dias: #Verificación si se identificaron días válidos
             print(f"--- Noticia ---")
-            print(f"Texto: {noticia[:400]}...") # Muestra los primeros 400 caracteres del texto
-            print(f"Diccionario obtenido: {diccionario_evaluado}\n") # Muestra del diccionario obtenido
-            
-            resultados_totales.append(diccionario_evaluado) # Agregar a la lista de resultados generales
-            
-    print("Procesamiento completado.")
+            print(f"Texto: {noticia[:400]}...") #Muestra los primeros 400 caracteres del texto
+            print(f"Días: {diccionario_dias}\n") #Muestra el diccionario de los días
+            print(f"Vías: {diccionario_vias}\n") #Muestra el diccionario de las vías
 
-if __name__ == "__main__": # Bloque de inicio
-    main()  # Llamada a la función principal
+if __name__ == "__main__": #Bloque de inicio
+    main()  #Llamada a la función principal
 ```
-
-### Funcionalidad del archivo principal
-
-El archivo principal realiza lo siguiente:
-
-1. Importa las funciones del módulo
-2. Inicia el proceso de Scraping
-3. Obtiene las noticias de CESPE
-4. Procesa cada noticia individualmente
-5. Evalúa los días de la semana
-6. Almacena los resultados en una lista
-7. Muestra los resultados obtenidos en la terminal
 
 ---
 
@@ -224,6 +231,8 @@ Durante la ejecución, el sistema accede al portal de noticias de CESPE, obtiene
 
 ## 9. Resultados obtenidos
 
-<img width="690" height="424" alt="image" src="https://github.com/user-attachments/assets/eae3c943-58bc-4a6d-b7d1-2bdd13c62040" />
+<img width="647" height="413" alt="image" src="https://github.com/user-attachments/assets/429e8aab-4778-4391-9047-2fc677d3600f" />
 
-Muestra que se encontraron 41 noticias, pero solo 4 noticias sí cumplen con el filtro. Por lo tanto, 37 noticias son comunicados generales que no tienen una fecha en formato "día + número del 1 al 31" (como "martes 4" o "domingo 9"), la función procesar_y_evaluar_dias() devuelve {} para ellas.
+<img width="640" height="113" alt="image" src="https://github.com/user-attachments/assets/b6c5b901-cbc3-44ff-b233-c604da5170b1" />
+
+Muestra que se encontraron 41 noticias, pero solo 4 noticias sí cumplen con el filtro. Por lo tanto, 37 noticias son comunicados generales que no tienen una fecha en formato "día + número del 1 al 31" (como "martes 4" o "domingo 9") gracias a la función procesar_y_evaluar_dias(). La función extraer_vias_publicas() genera un diccionario con "calle", "avenida" y "colonia", indicando el que aparezca en el texto.
