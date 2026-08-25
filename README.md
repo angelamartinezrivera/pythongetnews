@@ -4,7 +4,7 @@
 
 ## 1. Configuración del entorno de desarrollo
 
-Para el desarrollo de este proyecto se utilizó **Python 3.14.3**
+Para el desarrollo del trabajo se utilizó **Python 3.14.3**
 
 La ejecución de Python se realizó desde la terminal de Visual Studio Code. Esto permitió crear y administrar entornos virtuales, instalar dependencias y ejecutar los scripts del trabajo.
 
