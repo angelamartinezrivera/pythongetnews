@@ -39,11 +39,11 @@ Además de servir como guía para la elaboración del Scraping de la página de 
 
 ## 3. Creación de la estructura del proyecto
 
-Posteriormente se creó una carpeta destinada exclusivamente al desarrollo del proyecto dentro de la carpeta **Documentos** llamada **pythongetnews**.
+Posteriormente se creó una carpeta destinada para el desarrollo del trabajo dentro de la carpeta **Documentos** llamada **pythongetnews**.
 
-Esta carpeta funcionó como directorio principal para almacenar todos los archivos relacionados con el scraping, incluyendo código fuente, módulos y entorno virtual.
+Esta carpeta funcionó como directorio principal para almacenar todos los archivos relacionados con el Scraping, incluyendo código fuente, funciones y entorno virtual.
 
-<img width="341" height="140" alt="image" src="https://github.com/user-attachments/assets/71ae3562-6da4-4f45-8a85-66728e32faa5" />
+<img width="339" height="138" alt="image" src="https://github.com/user-attachments/assets/44a2bf5b-8af8-47c9-b0e5-4bc9d555217c" />
 
 Una vez creada la carpeta, se abrió **Visual Studio Code** y se accedió al directorio del proyecto para comenzar la configuración del entorno de trabajo.
 
@@ -73,7 +73,7 @@ pip install beautifulsoup4 requests mysql-connector-python
 
 ## 5. Creación de la carpeta de módulos
 
-Dentro de la carpeta principal del proyecto se creó una carpeta llamada **modulos**,  para almacenar las funciones encargadas del Scraping.
+Dentro de la carpeta principal del proyecto se creó una carpeta llamada **funciones**,  para almacenar las funciones encargadas del Scraping.
 
 ---
 
@@ -191,7 +191,7 @@ Después de crear el módulo con las funciones necesarias, se desarrolló el arc
 
 ```python
 #Importación de funciones
-from modulos.cespe_scraping import obtener_noticias_cespe, procesar_y_evaluar_dias, extraer_vias_publicas # Importación de funciones
+from funciones.cespe_scraping import obtener_noticias_cespe, procesar_y_evaluar_dias, extraer_vias_publicas # Importación de funciones
 
 def main():
     print("Iniciando scraping en la página de CESPE\n")
