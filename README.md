@@ -6,24 +6,23 @@
 
 Para el desarrollo del trabajo se utilizó **Python 3.14.3**
 
-La ejecución de Python se realizó desde la terminal de Visual Studio Code. Esto permitió crear y administrar entornos virtuales, instalar dependencias y ejecutar los scripts del trabajo.
+La ejecución de Python se realizó desde la terminal de Visual Studio Code. Esto permitió crear y administrar el entorno virtual, instalar dependencias y ejecutar los scripts del trabajo.
 
 Utilicé el programa **Visual Studio Code**, ya que es la herramienta con la que tengo más familiaridad. Además, facilita la edición de código, la administración de proyectos en Python y la ejecución de scripts desde una terminal integrada.
 
 ---
 
-## 2. Revisión de trabajos previos
+## 2. Revisión de trabajos anteriores
 
-Antes de comenzar el desarrollo del trabajo, realicé una revisión de los trabajos elaborados anteriormente en la materia **Programación para la Extracción de Datos**.
+Antes de comenzar el desarrollo del trabajo, realicé una revisión de los trabajos anteriores de la materia **Programación para la Extracción de Datos**.
 
 Estos trabajos me sirvieron de referencia para comprender nuevamente conceptos relacionados con:
 
 - Web Scraping.
-- Uso de librerías para extracción de datos.
+- Uso de librerías para la extracción de datos.
 - Procesamiento de información obtenida desde páginas web.
-- Organización modular de proyectos en Python.
 
-Además de servir como guía para la elaboración del Scraping de la página de **CESPE**, esta revisión me ayudó a reforzar conocimientos adquiridos durante el curso y recordar procedimientos.
+Además de servir como guía para la elaboración del Scraping de la página de **CESPE**, esta revisión me ayudó a reforzar conocimientos y recordar procedimientos.
 
 ### Ejemplos de trabajos utilizados como referencia
 
@@ -39,19 +38,19 @@ Además de servir como guía para la elaboración del Scraping de la página de 
 
 ## 3. Creación de la estructura del proyecto
 
-Posteriormente se creó una carpeta destinada para el desarrollo del trabajo dentro de la carpeta **Documentos** llamada **pythongetnews**.
+Después se creó una carpeta destinada para el desarrollo del trabajo dentro de la carpeta **Documentos** llamada **pythongetnews**.
 
-Esta carpeta funcionó como directorio principal para almacenar todos los archivos relacionados con el Scraping, incluyendo código fuente, funciones y entorno virtual.
+Esta carpeta funcionó como directorio principal para almacenar todos los archivos relacionados con el trabajo de Scraping, incluyendo código fuente, funciones y el entorno virtual.
 
 <img width="339" height="138" alt="image" src="https://github.com/user-attachments/assets/44a2bf5b-8af8-47c9-b0e5-4bc9d555217c" />
 
-Una vez creada la carpeta, se abrió **Visual Studio Code** y se accedió al directorio del proyecto para comenzar la configuración del entorno de trabajo.
+Una vez creada la carpeta, se abrió **Visual Studio Code** y se accedió al proyecto para comenzar la configuración del entorno de trabajo.
 
 ---
 
 ## 4. Creación y activación del entorno virtual
 
-Con el objetivo de mantener aisladas las dependencias del proyecto, se creó un entorno virtual mediante el siguiente comando:
+Se creó un entorno virtual mediante el siguiente comando:
 
 ```bash
 python -m venv venv
@@ -63,7 +62,7 @@ Después de crear el entorno virtual, se procedió a activarlo utilizando el sig
 venv\Scripts\activate
 ```
 
-Una vez activado el entorno virtual, instalé las librerías necesarias para el trabajo, usando el siguiente comando.
+Una vez activado el entorno virtual, instalé las librerías necesarias para el trabajo, usando el siguiente comando:
 
 ```bash
 pip install beautifulsoup4 requests mysql-connector-python
@@ -149,7 +148,7 @@ def procesar_y_evaluar_dias(texto):
 
 ## 7. Desarrollo del archivo principal `main.py`
 
-Después de crear el módulo con las funciones necesarias, se desarrolló el archivo principal `main.py`, encargado de coordinar todo el proceso del Scraping.
+Después de crear el script con las funciones necesarias, se desarrolló el archivo principal `main.py`, encargado de coordinar todo el proceso del Scraping.
 
 ### Código del archivo principal
 
@@ -187,7 +186,7 @@ Con todos los archivos creados y el entorno virtual activado, el programa se eje
 python main.py
 ```
 
-Durante la ejecución, el sistema accede al portal de noticias de CESPE, obtiene la información disponible, procesa cada publicación y genera diccionarios con los días y fechas válidas detectadas.
+Durante la ejecución, el sistema accede al portal de noticias de CESPE, obtiene la información, procesa cada publicación/noticia y genera diccionarios con los días y fechas válidas detectadas.
 
 ---
 
