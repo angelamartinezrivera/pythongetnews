@@ -154,7 +154,7 @@ Después de crear el script con las funciones necesarias, se desarrolló el arch
 
 ```python
 #Importación de funciones
-from funciones.cespe_scraping import obtener_noticias_cespe, procesar_y_evaluar_dias # Importación de funciones
+from funciones.cespe_scraping import obtener_noticias_cespe, procesar_y_evaluar_dias
 
 def main():
     print("Iniciando scraping en la página de CESPE\n")
